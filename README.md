@@ -1,30 +1,62 @@
-# React + TypeScript + Vite
+# Azure Deployment Service
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Azure Deployment Service is a Node.js application that allows users to upload files from a git repository to Azure Blob Storage and retrieve them based on subdomains. This project is inspired by similar deployment services and provides a seamless way to manage and access files in a structured manner.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clone git repositories and upload files to Azure Blob Storage.
+- Generate unique session IDs for each upload.
+- Track upload status using Redis.
+- Serve files based on subdomains.
+- Basic Express server setup with TypeScript.
+- Containerized build process for easy deployment.
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node.js installed
+- Redis installed and running locally
+- Azure account with Blob Storage set up
+- Git installed
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Clone the repository:
+
+```bash
+git clone <repository-url>
+cd azure_deployment_service
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Install dependencies:
+
+```bash
+npm install
+```
+
+### Initialize TypeScript project:
+
+```bash
+npx tsc --init
+```
+
+### Configure TypeScript: Update `tsconfig.json` with basic configuration.
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
+```
+### Add dependencies:
+
+```bash
+npm install express redis azure-storage simple-git cors
+```
